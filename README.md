@@ -1,19 +1,26 @@
-# Meta Recommendation with Robustness Improvement
+# Distributional Fairness-aware Recommendation
 
 ## 1 Abstract
 
-Meta-learning has been recognized as an effective remedy for solving the cold-start problem in the recommendation domain.
-Traditional models assume that the testing samples are always distributionally aligned with the training ones. However, in the cold start setting, we can only observe a small number of users and items, which, in practice, may fail to represent the newly arrived (testing) sample distributions, and thus lead to lowed recommendation performance. For alleviating this problem, in this paper, we propose a robust meta recommender framework to address the distribution shift problem. In specific, we argue that the distribution shift may exist on both of the user- and item-levels, and in order to remove them simultaneously, we design a novel distributionally robust model by hierarchically reweighing the training samples. Generally speaking, the sample weights are leveraged to tune the training distribution, and we minimize the worst-case loss by searching the weights on a unit ball, which is expected to improve the robustness of the learned model. Theoretically, we analyze the convergence rate and demonstrate the generalization capability of our framework. Empirically, we conduct extensive experiments based on different meta recommender models and real-world datasets to verify the generality and effectiveness of our framework. For benefiting the research community and promoting this direction, we have released our code at this page.
-
+Fairness has been gradually recognized as a significant problem in the recommendation domain.
+Previous models usually achieve fairness by reducing the average performance gap between different user groups. 
+However, the average performance may not sufficiently represent all the characters of the performances in a user group.
+Thus, equivalent average performance may not mean the recommender model is fair, for example, the variance of the performances can be different.
+To alleviate this problem, in this paper, we define a novel type of fairness, where we require that the performance distributions across different user groups should be similar. 
+We can prove that with the same performance distribution, the numerical characteristics of the group performance, including the expectation, variance and any high order moments are also the same. 
+To achieve distributional fairness, we propose a generative and adversarial training framework. 
+In specific, we regard the recommender model as the generator to compute the performance for each user in different groups, and then we deploy a discriminator to judge which group the performance is drawn from.
+By iteratively optimizing the generator and discriminator, we can theoretically prove that the optimal generator (recommender model) can indeed lead to the equivalent performance distributions.
+To smooth the adversarial training process, we propose a dual curriculum learning strategy to schedule the training samples for better model optimization. To make our framework more adaptive to the Top-N recommendation task, we soften the ranking metrics, and use them to measure the performance discrepancy.
+We conduct extensive experiments based on real-world datasets to demonstrate the effectiveness of our model. For benefiting the research community, we have released our project in this page.
 ## 2 Contributions
 
-In a summary, the main contributions of this paper can be concluded as follows:
-
-- We propose to improve the robustness of the meta recommender models for alleviating the distribution shift problem, which, to our knowledge, is the first time in the recommendation domain. 
-
-- To achieve the above idea, we design a hierarchical reweighing mechanism to remove the distribution shifts on the user- and item-level simultaneously. In addition, we provide theoretical foundations and insights for the proposed framework.
-
-- We conduct extensive experiments based on real-world datasets to demonstrate the effectiveness and generality of our framework, and for promoting this direction, we have released our project.
+In a summary, the main contributions of this paper are as follows:
+* We formally define a novel type of recommendation fairness, where we would like to reduce the performance distribution gap across different user groups.
+* To achieve distributional fairness, we design an adversarial model, and propose a dual curriculum learning strategy to smooth its training process. 
+To better optimize the ranking metrics, we design a soft strategy to make our framework fully differentiable.
+* Theoretically, we prove that (\romannumeral1) our adversarial method can indeed lead to the equivalent performance distributions and (\romannumeral2) with the same performance distributions, the performance expectation, variance and any higher order moment are also the same.
+* Empirically, we conduct extensive experiments based on four real-world datasets to demonstrate the effectiveness of our framework. To promote this research direction, we have released our project in this page.
 
 ## 3 Dataset Overview
 
