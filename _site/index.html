@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Meta Recommendation with Robustness Improvement | This is the official release for RobMeta.</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Meta Recommendation with Robustness Improvement" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This is the official release for RobMeta." />
+<meta property="og:description" content="This is the official release for RobMeta." />
+<link rel="canonical" href="http://localhost:4002/" />
+<meta property="og:url" content="http://localhost:4002/" />
+<meta property="og:site_name" content="Meta Recommendation with Robustness Improvement" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Meta Recommendation with Robustness Improvement" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"This is the official release for RobMeta.","headline":"Meta Recommendation with Robustness Improvement","name":"Meta Recommendation with Robustness Improvement","url":"http://localhost:4002/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+    <header class="page-header" role="banner">
+      <h1 class="project-name">Meta Recommendation with Robustness Improvement</h1>
+      <h2 class="project-tagline">This is the official release for RobMeta.</h2>
+      
+        <a href="https://drive.google.com/file/d/1Uh72K-T7oU4--wlaDRneeUIKnKHhvBtA/view?usp=sharing" class="btn">Download Project on Google Drive</a>
+      
+    </header>
+
+    <main id="content" class="main-content" role="main">
+      <h2 id="meta-recommendation-with-robustness-improvement">Meta Recommendation with Robustness Improvement</h2>
+
+<h2 id="1-abstract">1 Abstract</h2>
+
+<p>Meta learning has been recognized as an effective remedy for solving the cold-start problem in the recommendation domain. Existing models aim to learn how to generalize from the user behaviors in the training set to testing set. However, in the cold start settings, with only a small number of training samples, the testing distribution may easily deviate from the training one, which may invalidate the learned generalization patterns, and lower the recommendation performance. For alleviating this problem, in this paper, we propose a robust meta recommender framework to address the distribution shift problem. In specific, we argue that the distribution shift may exist on both the user- and interaction-levels, and in order to remove them simultaneously, we design a novel distributionally robust model by hierarchically reweighing the training samples. Different sample weights correspond to different training distributions, and we minimize the largest loss induced by the sample weights in a simplex, which essentially optimizes the upper bound of the testing loss. In addition, we analyze our framework on the convergence rates and generalization error bound to provide more theoretical insights. Empirically, we conduct extensive experiments based on different meta recommender models and real-world datasets to verify the generality and effectiveness of our framework. For benefiting the research community and promoting this direction, we have released our project at https://anonymousrobmeta.github.io/RobMeta/.</p>
+
+<h2 id="2-contributions">2 Contributions</h2>
+
+<p>In conclusion, the main contributions of this paper can be summarized as follows:</p>
+
+<ul>
+  <li>
+    <p>We propose to improve the robustness of meta recommender models for alleviating the distribution shift problem, which, to our knowledge, is the first time in the recommendation domain.</p>
+  </li>
+  <li>
+    <p>To achieve the above idea, we design a hierarchical reweighing mechanism to remove the distribution shifts on the user- and interaction-level simultaneously.
+In addition, we provide theoretical foundations and insights for the proposed framework.</p>
+  </li>
+  <li>
+    <p>We conduct extensive experiments based on real-world datasets to demonstrate the effectiveness and generality of our framework, and for promoting this direction, we have released our project at https://anonymousrobmeta.github.io/RobMeta/.</p>
+  </li>
+</ul>
+
+<h2 id="3-dataset-overview">3 Dataset Overview</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dataset</th>
+      <th># User</th>
+      <th># Item</th>
+      <th># Interaction</th>
+      <th>Sparsity</th>
+      <th>Domain</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MovieLens-100K</td>
+      <td>943</td>
+      <td>1,682</td>
+      <td>100,000</td>
+      <td>93.70%</td>
+      <td>Movies</td>
+    </tr>
+    <tr>
+      <td>MovieLens-1M</td>
+      <td>6,040</td>
+      <td>3,883</td>
+      <td>1,000,000</td>
+      <td>95.74%</td>
+      <td>Movies</td>
+    </tr>
+    <tr>
+      <td>Anime</td>
+      <td>20,000</td>
+      <td>9,499</td>
+      <td>1,771,114</td>
+      <td>99.07%</td>
+      <td>Animes</td>
+    </tr>
+    <tr>
+      <td>Jester</td>
+      <td>24,983</td>
+      <td>100</td>
+      <td>1,082,498</td>
+      <td>56.67%</td>
+      <td>Jokes</td>
+    </tr>
+    <tr>
+      <td>Steam</td>
+      <td>20,000</td>
+      <td>14,430</td>
+      <td>295,485</td>
+      <td>99.90%</td>
+      <td>Games</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="4-quick-start">4 Quick Start</h2>
+
+<h3 id="step-1-download-the-project">Step 1: Download the project</h3>
+
+<p>First of all, download our project <code class="language-plaintext highlighter-rouge">RobMeta.zip</code> from <a href="https://drive.google.com/file/d/1Uh72K-T7oU4--wlaDRneeUIKnKHhvBtA/view?usp=sharing">Google Drive</a> and unzip the file. The file includes both codes and datasets.</p>
+
+<h3 id="step-2-create-the-running-environment">Step 2: Create the running environment</h3>
+
+<p>Create <code class="language-plaintext highlighter-rouge">Python 3.8</code> enviroment and install the packages that the project requires.</p>
+<ul>
+  <li>numpy==1.22.3</li>
+  <li>PyYAML==6.0</li>
+  <li>scikit_learn==1.1.2</li>
+  <li>torch==1.11.0</li>
+</ul>
+
+<p>You can install the packages with the following command.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    pip install -r requirements.txt
+</code></pre></div></div>
+
+<h3 id="step-3-run-the-project">Step 3: Run the project</h3>
+
+<p>Choose a dataset to run (e.g. MovieLens-1M) with the following command.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    cd movielens-1m
+</code></pre></div></div>
+
+<p>Choose a model (e.g. MeLU) to run with the following command.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    python run.py MeLU hiddenDim1 32 hiddenDim2 32 localLr 0.1 lr 0.1 gamma 0.99 batchSize 20 epoch 200 userNum 20000
+</code></pre></div></div>
+
+<p>You can also use <code class="language-plaintext highlighter-rouge">quick_start.py</code> to run the project conveniently.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    python quick_start.py
+</code></pre></div></div>
+
+<p>You can also change the hyper-parameters as you want. The necessary hyper-parameters for each model have been recorded in the <code class="language-plaintext highlighter-rouge">hyperParam</code> dictionary.</p>
+
+<h3 id="step-4-check-the-performance">Step 4: Check the performance</h3>
+
+<p>The performance will be saved in <code class="language-plaintext highlighter-rouge">performance.csv</code>. The first column is the name of models. The second column is the number of testing sets (with different β). The third to the sixth columns are metrices <code class="language-plaintext highlighter-rouge">NDCG@10, Recall@10, Precision@10, F1@10</code> in order.</p>
+
+<h2 id="5-hyper-parameters-search-range">5 Hyper-parameters search range</h2>
+
+<p>We tune hyper-parameters according to the following table.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Hyper-parameter</th>
+      <th>Explanation</th>
+      <th>Range</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>taskWeightLr</td>
+      <td>user weights lr</td>
+      <td>{0.00001, 0.0001, 0.001, 0.005, 0.01, 0.05, 0.1}</td>
+    </tr>
+    <tr>
+      <td>sampleWeightLr</td>
+      <td>interaction weights lr</td>
+      <td>{0.00001, 0.0001, 0.001, 0.005, 0.01, 0.05, 0.1}</td>
+    </tr>
+    <tr>
+      <td>localLr</td>
+      <td>adapt lr</td>
+      <td>{0.001, 0.01, 0.05, 0.1}</td>
+    </tr>
+    <tr>
+      <td>lr</td>
+      <td>model lr</td>
+      <td>{0.001, 0.01, 0.05, 0.1}</td>
+    </tr>
+    <tr>
+      <td>batchSize</td>
+      <td>batch size</td>
+      <td>{20, 100, 200, 400}</td>
+    </tr>
+    <tr>
+      <td>gamma</td>
+      <td>learning rate decay</td>
+      <td>{0.95, 0.97, 0.99}</td>
+    </tr>
+    <tr>
+      <td>hiddenDim1</td>
+      <td>hidden layer1 dim</td>
+      <td>{16, 32, 64, 128}</td>
+    </tr>
+    <tr>
+      <td>hiddenDim2</td>
+      <td>hidden layer2 dim</td>
+      <td>{16, 32, 64, 128}</td>
+    </tr>
+    <tr>
+      <td>indHiddenDim</td>
+      <td>index embedding dim</td>
+      <td>{16, 32, 64, 128}</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>As different base models have different hyper-paramerters to tune, you can view the details in the corresponding model files.</p>
+
+
+      <footer class="site-footer">
+        
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+      </footer>
+    </main>
+  </body>
+</html>

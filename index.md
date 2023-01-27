@@ -1,19 +1,23 @@
-# Meta Recommendation with Robustness Improvement
+---
+layout: default
+---
+
+## Meta Recommendation with Robustness Improvement
 
 ## 1 Abstract
 
-Meta-learning has been recognized as an effective remedy for solving the cold-start problem in the recommendation domain.
-Traditional models assume that the testing samples are always distributionally aligned with the training ones. However, in the cold start setting, we can only observe a small number of users and items, which, in practice, may fail to represent the newly arrived (testing) sample distributions, and thus lead to lowed recommendation performance. For alleviating this problem, in this paper, we propose a robust meta recommender framework to address the distribution shift problem. In specific, we argue that the distribution shift may exist on both of the user- and item-levels, and in order to remove them simultaneously, we design a novel distributionally robust model by hierarchically reweighing the training samples. Generally speaking, the sample weights are leveraged to tune the training distribution, and we minimize the worst-case loss by searching the weights on a unit ball, which is expected to improve the robustness of the learned model. Theoretically, we analyze the convergence rate and demonstrate the generalization capability of our framework. Empirically, we conduct extensive experiments based on different meta recommender models and real-world datasets to verify the generality and effectiveness of our framework. For benefiting the research community and promoting this direction, we have released our code at this page.
+Meta learning has been recognized as an effective remedy for solving the cold-start problem in the recommendation domain. Existing models aim to learn how to generalize from the user behaviors in the training set to testing set. However, in the cold start settings, with only a small number of training samples, the testing distribution may easily deviate from the training one, which may invalidate the learned generalization patterns, and lower the recommendation performance. For alleviating this problem, in this paper, we propose a robust meta recommender framework to address the distribution shift problem. In specific, we argue that the distribution shift may exist on both the user- and interaction-levels, and in order to remove them simultaneously, we design a novel distributionally robust model by hierarchically reweighing the training samples. Different sample weights correspond to different training distributions, and we minimize the largest loss induced by the sample weights in a simplex, which essentially optimizes the upper bound of the testing loss. In addition, we analyze our framework on the convergence rates and generalization error bound to provide more theoretical insights. Empirically, we conduct extensive experiments based on different meta recommender models and real-world datasets to verify the generality and effectiveness of our framework. For benefiting the research community and promoting this direction, we have released our project at https://anonymousrobmeta.github.io/RobMeta/.
 
 ## 2 Contributions
 
-In a summary, the main contributions of this paper can be concluded as follows:
+In conclusion, the main contributions of this paper can be summarized as follows:
 
-- We propose to improve the robustness of the meta recommender models for alleviating the distribution shift problem, which, to our knowledge, is the first time in the recommendation domain. 
+- We propose to improve the robustness of meta recommender models for alleviating the distribution shift problem, which, to our knowledge, is the first time in the recommendation domain. 
 
-- To achieve the above idea, we design a hierarchical reweighing mechanism to remove the distribution shifts on the user- and item-level simultaneously. In addition, we provide theoretical foundations and insights for the proposed framework.
+- To achieve the above idea, we design a hierarchical reweighing mechanism to remove the distribution shifts on the user- and interaction-level simultaneously.
+In addition, we provide theoretical foundations and insights for the proposed framework.
 
-- We conduct extensive experiments based on real-world datasets to demonstrate the effectiveness and generality of our framework, and for promoting this direction, we have released our project.
+- We conduct extensive experiments based on real-world datasets to demonstrate the effectiveness and generality of our framework, and for promoting this direction, we have released our project at https://anonymousrobmeta.github.io/RobMeta/.
 
 ## 3 Dataset Overview
 
@@ -78,7 +82,7 @@ The performance will be saved in `performance.csv`. The first column is the name
 
 We tune hyper-parameters according to the following table.
 
-| Hyper-parameter     | Explain | Range |
+| Hyper-parameter     | Explanation | Range |
 | ------------------- | ---------------------------------------------------- | ------------------- |
 | taskWeightLr | user weights lr | \{0.00001, 0.0001, 0.001, 0.005, 0.01, 0.05, 0.1\} |
 | sampleWeightLr | interaction weights lr | \{0.00001, 0.0001, 0.001, 0.005, 0.01, 0.05, 0.1\} |
@@ -90,4 +94,4 @@ We tune hyper-parameters according to the following table.
 | hiddenDim2 | hidden layer2 dim | \{16, 32, 64, 128\} |
 | indHiddenDim | index embedding dim | \{16, 32, 64, 128\} |
 
-As different base models have different hyper-paramerters to tune, you can view the details in corresponding model files.orresponding model files.
+As different base models have different hyper-paramerters to tune, you can view the details in the corresponding model files.
