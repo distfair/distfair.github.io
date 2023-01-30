@@ -25,18 +25,17 @@ In a summary, the main contributions of this paper are as follows:
 - We formally define a novel type of recommendation fairness, where we would like to reduce the performance distribution gap across different user groups.
 - To achieve distributional fairness, we design an adversarial model, and propose a dual curriculum learning strategy to smooth its training process. 
 To better optimize the ranking metrics, we design a soft strategy to make our framework fully differentiable.
-- Theoretically, we prove that (\romannumeral1) our adversarial method can indeed lead to the equivalent performance distributions and (\romannumeral2) with the same performance distributions, the performance expectation, variance and any higher order moment are also the same.
-- Empirically, we conduct extensive experiments based on four real-world datasets to demonstrate the effectiveness of our framework. To promote this research direction, we have released our project at https://distfair.github.io.
-
+- Theoretically, we prove that (1) our adversarial method can indeed lead to the equivalent performance distributions and (2) with the same performance distributions, the performance expectation, variance and any higher order moment are also the same.
+- Empirically, we conduct extensive experiments based on four real-world datasets to demonstrate the effectiveness of our framework. To promote this research direction, we have released our project at this page.
 ## 3 Dataset Overview
 
-| Dataset        | # User | # Item | # Interaction | Sparsity | Domain |
-| -------------- | ------ | ------ | ------------- | -------- | ------ |
-| MovieLens-100K | 943    | 1,682  | 100,000       | 93.70%   | Movies |
-| MovieLens-1M   | 6,040  | 3,883  | 1,000,000     | 95.74%   | Movies |
-| Anime          | 20,000 | 9,499  | 1,771,114     | 99.07%   | Animes |
-| Jester         | 24,983 | 100    | 1,082,498     | 56.67%   | Jokes  |
-| Steam          | 20,000 | 14,430 | 295,485       | 99.90%   | Games  |
+| Dataset        | ML-1M | CiteULike | Sports | Home |
+| -------------- | ------ | ------ | ------------- | -------- |
+| # User | 6,037    | 5,551  | 22,685       | 41,253   |
+| # Item   | 3,952  | 16,979  | 12,300     | 19,364   |
+| # Interaction  | 575,281 | 204,986  | 185,718     | 338,376  |
+| Sparsity         | 97.59% | 99.78%    | 99.93%     | 99.96%  |
+| Domain          | Movies | Papers | E-commerce       | E-commerce  |
 
 
 
@@ -44,15 +43,16 @@ To better optimize the ranking metrics, we design a soft strategy to make our fr
 
 ### Step 1: Download the project
 
-First of all, download our project `RobMeta.zip` from [Google Drive](https://drive.google.com/file/d/1Uh72K-T7oU4--wlaDRneeUIKnKHhvBtA/view?usp=sharing) and unzip the file. The file includes both codes and datasets.
+Our project `DistFair.zip` is available at [Google Drive](https://drive.google.com/file/d/1Uh72K-T7oU4--wlaDRneeUIKnKHhvBtA/view?usp=sharing) Download and unzip our project. It contains both codes and datasets.
 
 ### Step 2: Create the running environment
 
-Create `Python 3.8` enviroment and install the packages that the project requires.
-- numpy==1.22.3
-- PyYAML==6.0 
+Create `Python 3.9` enviroment and install the packages that the project requires.
+- numpy==1.23.2
 - scikit_learn==1.1.2 
-- torch==1.11.0
+- torch==1.12.1
+- pybind11==2.10.0
+- tkinter==0.1.0
 
 You can install the packages with the following command.
 
@@ -61,30 +61,18 @@ You can install the packages with the following command.
 ```
 
 ### Step 3: Run the project
-
-Choose a dataset to run (e.g. MovieLens-1M) with the following command.
-
+Run our frameworks with the following command:
 ```
-    cd movielens-1m
+    python main.py --dataset ml-1m --model mf --methods distfair --rec_lr 0.01
 ```
-
-Choose a model (e.g. MeLU) to run with the following command.
-
-```
-    python run.py MeLU hiddenDim1 32 hiddenDim2 32 localLr 0.1 lr 0.1 gamma 0.99 batchSize 20 epoch 200 userNum 20000
-```
-
-You can also use `quick_start.py` to run the project conveniently.
-
-```
-    python quick_start.py
-```
-
-You can also change the hyper-parameters as you want. The necessary hyper-parameters for each model have been recorded in the `hyperParam` dictionary.
+where 
+- `--dataset`: dataset chosen from `['ml-1m', 'citeulike', 'sports', 'home]`;
+- `--model`: base model chosen from `['mf', 'lgn', 'nmf']`;
+- `--methods`: fairness chosen from `['value', 'non_parity', 'distfair']`;
 
 ### Step 4: Check the performance
 
-The performance will be saved in `performance.csv`. The first column is the name of models. The second column is the number of testing sets (with different β). The third to the sixth columns are metrices `NDCG@10, Recall@10, Precision@10, F1@10` in order.
+For the recommendation performance, we use NDCG@10, Recall@10, Precision@10, F1@10 as evaluation metrics. For the fairness performance, we use $\Delta E, \Delta V$, KL as evaluation metrics. The results are reported in Table 3 in the original paper.
 
 
 ## 5 Hyper-parameters search range
@@ -93,14 +81,12 @@ We tune hyper-parameters according to the following table.
 
 | Hyper-parameter     | Explanation | Range |
 | ------------------- | ---------------------------------------------------- | ------------------- |
-| taskWeightLr | user weights lr | \{0.00001, 0.0001, 0.001, 0.005, 0.01, 0.05, 0.1\} |
-| sampleWeightLr | interaction weights lr | \{0.00001, 0.0001, 0.001, 0.005, 0.01, 0.05, 0.1\} |
-| localLr     | adapt lr | \{0.001, 0.01, 0.05, 0.1\} |
-| lr   | model lr |  \{0.001, 0.01, 0.05, 0.1\} |
-| batchSize | batch size |  \{20, 100, 200, 400\} |
-| gamma | learning rate decay | \{0.95, 0.97, 0.99\} |
-| hiddenDim1 | hidden layer1 dim | \{16, 32, 64, 128\} |
-| hiddenDim2 | hidden layer2 dim | \{16, 32, 64, 128\} |
-| indHiddenDim | index embedding dim | \{16, 32, 64, 128\} |
-
-As different base models have different hyper-paramerters to tune, you can view the details in the corresponding model files.
+| rec_lr | learning rate | \{0.00001, 0.0001, 0.001, 0.01, 0.1, 0.2\} |
+| decay | weight of l2-norm regularizer | \{0.00001, 0.0001, 0.001, 0.01, 0.1, 1\} |
+| recdim    | embedding size | \{4,8,16,32,64\} |
+| weight_disc   | weight of fairness constraints |  \{0.00001, 0.00001, 0.0001, 0.001, 0.01, 0.1, 1, 10, 20, 50, 100\} |
+| bpr_batch_size | batch size |  \{256, 512, 1024, 2048\} |
+| Disc_lr | learning rate of discriminator | \{0.95, 0.97, 0.99\} |
+| Disc_dim | hidden size of discriminator | \{16, 32, 64, 128\} |
+| SR_tau | temprature parameter | \{16, 32, 64, 128\} |
+| cl_num | changing speeds of curriculum learning | \{16, 32, 64, 128\} |
