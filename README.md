@@ -81,12 +81,12 @@ We tune hyper-parameters according to the following table.
 
 | Hyper-parameter     | Explanation | Range |
 | ------------------- | ---------------------------------------------------- | ------------------- |
-| rec_lr | learning rate | \{0.00001, 0.0001, 0.001, 0.01, 0.1, 0.2\} |
-| decay | weight of l2-norm regularizer | \{0.00001, 0.0001, 0.001, 0.01, 0.1, 1\} |
-| recdim    | embedding size | \{4,8,16,32,64\} |
-| weight_disc   | weight of fairness constraints |  \{0.00001, 0.00001, 0.0001, 0.001, 0.01, 0.1, 1, 10, 20, 50, 100\} |
+| rec_lr | learning rate | \{0.0001, 0.001, 0.01, 0.1\} |
+| decay | weight of l2-norm regularizer | \{0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1\} |
+| recdim    | embedding size | \{4, 8, 16, 32, 64\} |
+| weight_disc   | weight of fairness constraints |  \{0.0001, 0.001, 0.01, 0.1, 1, 10\} |
 | bpr_batch_size | batch size |  \{256, 512, 1024, 2048\} |
-| Disc_lr | learning rate of discriminator | \{0.95, 0.97, 0.99\} |
-| Disc_dim | hidden size of discriminator | \{16, 32, 64, 128\} |
-| SR_tau | temprature parameter | \{16, 32, 64, 128\} |
-| cl_num | changing speeds of curriculum learning | \{16, 32, 64, 128\} |
+| Disc_lr | learning rate of discriminator | \{0.0001, 0.001, 0.01, 0.1\} |
+| Disc_dim | hidden size of discriminator | \{4, 8, 16, 32, 64\} |
+| SR_tau | temprature parameter | \{0.0001, 0.001, 0.01, 0.1, 1, 10, 100\} |
+| cl_num | changing speeds of curriculum learning | \{1, 2, 3, 4, 5\} |
