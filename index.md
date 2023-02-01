@@ -17,7 +17,7 @@ In specific, we regard the recommender model as the generator to compute the per
 By iteratively optimizing the generator and discriminator, we can theoretically prove that the optimal generator (recommender model) can indeed lead to the equivalent performance distributions.
 To smooth the adversarial training process, we propose a dual curriculum learning strategy to schedule the training samples for better model optimization. To make our framework more adaptive to the Top-N recommendation task, we soften the ranking metrics, and use them to measure the performance discrepancy.
 We conduct extensive experiments based on real-world datasets to demonstrate the effectiveness of our model. 
-For benefiting the research community, we have released our project at https://distfair.github.io.
+For benefiting the research community, we have released our project at [this page](https://distfair.github.io).
 
 ## 2 Contributions
 
@@ -43,8 +43,7 @@ To better optimize the ranking metrics, we design a soft strategy to make our fr
 
 ### Step 1: Download the project
 
-Our project `DistFair.zip` is available at [Google Drive](https://drive.google.com/file/d/1Uh72K-T7oU4--wlaDRneeUIKnKHhvBtA/view?usp=sharing) Download and unzip our project. It contains both codes and datasets.
-
+Our project `DistFair.zip` is available at [Google Drive](https://drive.google.com/file/d/1qsJlpLMFMpkJWLnHlKI4yt2vHN2ym0VT/view?usp=sharing) Download and unzip our project. It contains both codes and datasets.
 ### Step 2: Create the running environment
 
 Create `Python 3.9` enviroment and install the packages that the project requires.
@@ -54,7 +53,7 @@ Create `Python 3.9` enviroment and install the packages that the project require
 - pybind11==2.10.0
 - tkinter==0.1.0
 
-You can install the packages with the following command.
+You can install the packages with the following command. `pybind11` is necessary in our code to accelerate the sampling process.
 
 ```
     pip install -r requirements.txt
@@ -63,6 +62,7 @@ You can install the packages with the following command.
 ### Step 3: Run the project
 Run our frameworks with the following command:
 ```
+    cd ./code
     python main.py --dataset ml-1m --model mf --methods distfair --rec_lr 0.01
 ```
 where 
@@ -81,12 +81,12 @@ We tune hyper-parameters according to the following table.
 
 | Hyper-parameter     | Explanation | Range |
 | ------------------- | ---------------------------------------------------- | ------------------- |
-| rec_lr | learning rate | \{0.0001, 0.001, 0.01, 0.1\} |
+| rec_lr | learning rate of recommender model | \{0.0001, 0.001, 0.01, 0.1\} |
+| disc_lr | learning rate of discriminator | \{0.0001, 0.001, 0.01, 0.1\} |
 | decay | weight of l2-norm regularizer | \{0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1\} |
-| recdim    | embedding size | \{4, 8, 16, 32, 64\} |
-| weight_disc   | weight of fairness constraints |  \{0.0001, 0.001, 0.01, 0.1, 1, 10\} |
 | bpr_batch_size | batch size |  \{256, 512, 1024, 2048\} |
-| Disc_lr | learning rate of discriminator | \{0.0001, 0.001, 0.01, 0.1\} |
-| Disc_dim | hidden size of discriminator | \{4, 8, 16, 32, 64\} |
-| SR_tau | temprature parameter | \{0.0001, 0.001, 0.01, 0.1, 1, 10, 100\} |
-| cl_num | changing speeds of curriculum learning | \{1, 2, 3, 4, 5\} |
+| rec_dim    | embedding size | \{4, 8, 16, 32, 64\} |
+| disc_dim | hidden size of discriminator | \{4, 8, 16, 32, 64\} |
+| weight_disc   | weight of fairness constraints |  \{0.0001, 0.001, 0.01, 0.1, 1, 10\} |
+| cl_speed | changing speeds of curriculum learning | \{1, 2, 3, 4, 5\} |
+| tau | temprature parameter of soft ranker | \{0.0001, 0.001, 0.01, 0.1, 1, 10, 100\} |
