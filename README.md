@@ -43,7 +43,7 @@ To better optimize the ranking metrics, we design a soft strategy to make our fr
 
 ### Step 1: Download the project
 
-Our project `DistFair.zip` is available at [Google Drive](https://drive.google.com/file/d/1qsJlpLMFMpkJWLnHlKI4yt2vHN2ym0VT/view?usp=sharing) Download and unzip our project. It contains both codes and datasets.
+Our project `DistFair.zip` is available at [Google Drive](https://drive.google.com/file/d/1qsJlpLMFMpkJWLnHlKI4yt2vHN2ym0VT/view?usp=sharing). Download and unzip our project. It contains both codes and datasets.
 ### Step 2: Create the running environment
 
 Create `Python 3.9` enviroment and install the packages that the project requires.
